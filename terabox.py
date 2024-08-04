@@ -62,7 +62,8 @@ async def start_command(client, message):
                 reply_markup=InlineKeyboardMarkup(btn)
             )
             return
-    data = message.command[1]
+        
+        data = message.command[1]
     if data.split("-", 1)[0] == "verify": # set if or elif it depend on your code
         userid = data.split("-", 2)[1]
         token = data.split("-", 3)[2]
@@ -83,6 +84,7 @@ async def start_command(client, message):
                 text="<b>Invalid link or Expired link !</b>",
                 protect_content=True
             )
+
     sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEYonplzwrczhVu3I6HqPBzro3L2JU6YAACvAUAAj-VzAoTSKpoG9FPRjQE")
     await asyncio.sleep(2)
     await sticker_message.delete()

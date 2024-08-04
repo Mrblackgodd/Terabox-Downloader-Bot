@@ -50,6 +50,18 @@ app = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
+        if not await check_verification(client, message.from_user.id) and VERIFY == True:
+            btn = [[
+                InlineKeyboardButton("Verify", url=await get_token(client, message.from_user.id, f"https://telegram.me/{BOT_USERNAME}?start="))
+            ],[
+                InlineKeyboardButton("How To Open Link & Verify", url=VERIFY_TUTORIAL)
+            ]]
+            await message.reply_text(
+                text="<b>You are not verified !\nKindly verify to continue !</b>",
+                protect_content=True,
+                reply_markup=InlineKeyboardMarkup(btn)
+            )
+            return
     data = message.command[1]
     if data.split("-", 1)[0] == "verify": # set if or elif it depend on your code
         userid = data.split("-", 2)[1]
@@ -82,20 +94,7 @@ async def start_command(client, message):
     await message.reply_text(reply_message, reply_markup=reply_markup)
 
 async def is_user_member(client, user_id):
-    try:
-        if not await check_verification(client, message.from_user.id) and VERIFY == True:
-            btn = [[
-                InlineKeyboardButton("Verify", url=await get_token(client, message.from_user.id, f"https://telegram.me/{BOT_USERNAME}?start="))
-            ],[
-                InlineKeyboardButton("How To Open Link & Verify", url=VERIFY_TUTORIAL)
-            ]]
-            await message.reply_text(
-                text="<b>You are not verified !\nKindly verify to continue !</b>",
-                protect_content=True,
-                reply_markup=InlineKeyboardMarkup(btn)
-            )
-            return
-            
+    try:     
         member = await client.get_chat_member(fsub_id, user_id)
         logging.info(f"User {user_id} membership status: {member.status}")
         if member.status in [ChatMemberStatus.MEMBER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:

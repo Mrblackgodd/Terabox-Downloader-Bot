@@ -1,2 +1,17 @@
 shortzy
 pytz
+aria2p
+pyrogram
+pymongo
+motor
+requests
+bs4
+tgcrypto
+uvloop
+aiohttp
+aiofiles
+pyrofork==2.2.11
+python-dotenv
+gunicorn
+gent
+flask

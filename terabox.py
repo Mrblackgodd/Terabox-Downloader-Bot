@@ -12,6 +12,7 @@ from status import format_progress_bar
 from video import download_video, upload_video
 from web import keep_alive
 from utils import verify_user, check_token, check_verification, get_token
+from info import VERIFY, VERIFY_TUTORIAL, BOT_USERNAME
 
 load_dotenv('config.env', override=True)
 

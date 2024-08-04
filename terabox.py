@@ -11,6 +11,7 @@ import time
 from status import format_progress_bar
 from video import download_video, upload_video
 from web import keep_alive
+from utils import verify_user, check_token
 
 load_dotenv('config.env', override=True)
 
